@@ -28,7 +28,7 @@ function add(product) {
     return db('products')
         .insert(product)
         .then(id => {
-            return getById(id[0])
+            return findById(id[0])
         });
 };
 
@@ -39,7 +39,7 @@ function update(id, changes) {
 };
 
 function remove(id) {
-    return db('users')
+    return db('products')
         .where({ id })
         .del();
 };

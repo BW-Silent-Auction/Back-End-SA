@@ -28,7 +28,7 @@ function add(seller) {
     return db('sellers')
         .insert(seller)
         .then(id => {
-            return getById(id[0])
+            return findById(id[0])
         });
 };
 
