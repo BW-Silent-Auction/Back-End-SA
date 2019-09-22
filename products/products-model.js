@@ -10,30 +10,30 @@ module.exports = {
 };
 
 function find() {
-    return db('buyers');
+    return db('products');
 };
 
 function findBy(filter) {
-    return db('buyers')
+    return db('products')
         .where(filter);
 };
 
 function findById(id) {
-    return db('buyers')
+    return db('products')
         .where({ id })
         .first();
 };
 
-function add(buyer) {
-    return db('buyers')
-        .insert(buyer)
+function add(product) {
+    return db('products')
+        .insert(product)
         .then(id => {
             return getById(id[0])
         });
 };
 
 function update(id, changes) {
-    return db('buyers')
+    return db('products')
         .where({ id })
         .update(changes)
 };

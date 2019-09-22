@@ -1,10 +1,10 @@
 const express = require('express');
-const Buyers = require('./buyers-model');
+const Products = require('./products-model');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    Buyers.find()
+    Products.find()
         .then(success => res.status(200).json(success))
         .catch(err => res.status(500).json(err))
 });
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const { id } = req.params;
     
-    Buyers.findById(id)
+    Products.findById(id)
         .then(success => res.status(200).json(success))
         .catch(err => res.status(500).json(err));
 });
