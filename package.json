@@ -1,0 +1,33 @@
+{
+  "name": "Back-End-SA",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BW-Silent-Auction/Back-End-SA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BW-Silent-Auction/Back-End-SA/issues"
+  },
+  "homepage": "https://github.com/BW-Silent-Auction/Back-End-SA#readme",
+  "dependencies": {
+    "3": "^2.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "helmet": "^3.21.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.4",
+    "pg": "^7.12.1",
+    "sqlite": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
