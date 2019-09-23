@@ -8,22 +8,9 @@ Create an application that connects buyers and sellers for transactions in a sil
 ## HEROKU BASE_URL
 https://bw-silent-auction.herokuapp.com/
 
-## API Spec
-The preferred JSON object to be returned by the APU is structured as follows:
-
-### Buyer Login
-
-### Buyer Register
-
-### Seller Login
-
-### Seller Register
-
-### Products
-
 ## Endpoints
 
-### Authentication
+### **Authentication**
 `POST /api/buyers/login`
 
 `POST /api/sellers/login`
@@ -39,7 +26,7 @@ No authentication required, returns a JSON web token
 
 Required fields: `username`, `password`
 
-### Registration
+### **Registration**
 `POST /api/buyers/register`
 
 `POST /api/sellers/register`
@@ -49,32 +36,222 @@ Example request body:
 {
 	"username": "alex",
 	"password": "password",
-    "email": "alex@alex.com
+    "email": "alex@alex.com,
+    "first_name": "Alex",
+    "last_name": "Gordon"
 }
 ```
 No authentication required, returns a User object
 
-Required fields: `username`, `password`, `email`
+Required fields: `username`, `password`, `email`, `first_name`, `last_name`
 
-### Get all products
+### **Get all products**
 `GET /api/products`
 
-Requires authentication
+Requires authentication. Request header should be structured as follows:
 
+*jwt = JSON web token issued at login*
 
+```
+{
+    "authorization": "jwt"
+}
+```
 
+Returns an array of all products from database. Example response body:
+
+```
+[
+    {
+        "id": 1,
+        "seller_id": 3,
+        "description": "Playstation 4",
+        "starting_price": 189.95,
+        "image": null,
+        "active": 1,
+        "created_at": "2019-09-22 11:42:12"
+    },
+    {
+        "id": 2,
+        "seller_id": 5,
+        "title": "iPhone 11",
+        "description": "The greatest iPhone yet",
+        "starting_price": 1150.95,
+        "image": null,
+        "active": 1,
+        "created_at": "2019-09-23 22:37:57"
+    },
+]
+```
+
+### **Post product for sale**
+
+`POST /api/products`
+
+Requires authentication. 
+
+req.header.authorization = token;
+
+Example request body:
+
+```
+{
+    "seller_id": 5,
+    "title": "iPhone 11",
+    "description": "The greatest iPhone yet",
+    "image": file,
+    "starting_price": 1150.95
+}
+```
+
+Required fields: `seller_id`, `title`, `description`, `starting_price`
+
+Returns the new Product object. Example response body:
+
+```
+{
+    "id": 2,
+    "seller_id": 5,
+    "description": "The greatest iPhone yet",
+    "starting_price": 1150.95,
+    "image": null,
+    "active": 1,
+    "created_at": "2019-09-23 22:37:57"
+}
+```
+
+### **Get product by product ID**
+
+`GET /api/products/:id`
+
+Requires authentication. 
+
+req.header.authorization = token;
+
+Returns the Product object. Example response body:
+
+```
+{
+    "id": 2,
+    "seller_id": 5,
+    "description": "The greatest iPhone yet",
+    "starting_price": 1150.95,
+    "image": null,
+    "active": 1,
+    "created_at": "2019-09-23 22:37:57"
+}
+```
+
+### **Get product bids**
+
+`GET /api/products/:id/bids`
+
+Requires authentication. 
+
+req.header.authorization = token;
+
+Returns an Array of all bids placed on a specific product. Example response body:
+
+```
+[
+    {
+        "id": 1,
+        "product_id": 2,
+        "buyer_id": 1,
+        "bid_amount": 1160.95
+    },
+    {
+        "id": 2,
+        "product_id": 2,
+        "buyer_id": 2,
+        "bid_amount": 1165.95
+    },
+    {
+        "id": 3,
+        "product_id": 2,
+        "buyer_id": 3,
+        "bid_amount": 1170.95
+    },
+    {
+        "id": 12,
+        "product_id": 2,
+        "buyer_id": 4,
+        "bid_amount": 1180.95
+    }
+]
+```
+
+### **Post bid**
+
+`POST /api/products/:id/bids`
+
+Requires authentication. 
+
+req.header.authorization = token;
+
+Example request body:
+
+```
+{
+    "buyer_id": 6,
+    "bid_amount": 1190.95
+}
+```
+
+Required fields: `buyer_id`, `bid_amount`
+
+### **Get all products by seller ID**
+
+`GET /api/sellers/:id/auctions`
+
+Requires authentication. 
+
+req.header.authorization = token;
+
+Returns an Array of all products previously posted by a specific seller. Example response body:
+
+```
+[
+    {
+        "id": 2,
+        "seller_id": 5,
+        "description": "The greatest iPhone yet",
+        "starting_price": 1150.95,
+        "image": null,
+        "active": 1,
+        "created_at": "2019-09-23 22:37:57"
+    },
+]
+```
+
+## Other potentially useful endpoints
+
+### Delete product by ID
+
+`DEL /api/products/:id`
+
+Requires authorization.
+
+### Edit product by ID
+
+`PUT /api/products/:id`
+
+Requires at least one field to update. 
+
+Cannot created_at, id, seller_id.
+
+### Delete buyer by ID
+
+`DEL /api/buyers/:id`
 
 ### Notes
-- Right now we are not asking for a first_name or last_name field at register. If we want to use this information for front-end UI we would need to collect at registration.
-- Right now get all products will return all products listed in the database. I think it should be up to the front-end to sort whether the status is actice but I can also filter to send back only active products (or I could set up an additional endpoint to send all, whether active or not)
-
 - 
 
 ### Todo
-- Host on Heroku
 - Correct login endpoints to only send back appropriate information
+- Correct register to return the user
 - Practice image upload with a mock front-end to determine proper db data-type
-- Add first_name and last_name to registration form
-
+- Add 'title' field to products db
+- Create delete user endpoint
 
 ### Notepad
