@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const Buyers = require('./buyers-model');
+const generateToken = require('../auth/generateToken');
 
 const router = express.Router();
 
@@ -35,7 +36,22 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+    let { username, password } = req.body;
 
+    if (!username || !password) {
+        res.status(400).json({ error: 'Please provide the proper body with your request' });
+    } else {
+        Buyers.findBy({ username })
+            .first()
+            .then(buyer => {
+                if (buyer && bcrypt.compareSync(password, buyer.password)) {
+                    const token = generateToken(buyer);
+                    res.status(200).json(token);
+                } else {
+                    res.status(401).json({ error: 'Invalid crednetials' });
+                };
+            });
+    };
 });
 
 module.exports = router;
