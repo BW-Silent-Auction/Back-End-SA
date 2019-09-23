@@ -4,6 +4,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    findPostsBySeller,
     add,
     update,
     remove,
@@ -22,6 +23,11 @@ function findById(id) {
     return db('sellers')
         .where({ id })
         .first();
+};
+
+function findPostsBySeller(id) {
+    return db('products')
+        .where({ seller_id: id })
 };
 
 function add(seller) {

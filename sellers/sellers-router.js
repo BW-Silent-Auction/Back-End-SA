@@ -20,6 +20,14 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
+router.get('/:id/auctions', (req, res) => {
+    const { id } = req.params;
+
+    Sellers.findPostsBySeller(id)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(500).json(err));
+});
+
 router.post('/register', (req, res) => {
     const { username, password } = req.body;
 
