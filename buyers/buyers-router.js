@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     Buyers.find()
         .then(success => res.status(200).json(success))
-        .catch(err => res.status(500).json(err))
+        .catch(err => res.status(500).json(err));
 });
 
 router.get('/:id', (req, res) => {
@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        res.status(400).json({ error: 'Please provide the proper body with the request' })
+        res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         hash = bcrypt.hashSync(password);
         req.body.password = hash;
@@ -52,6 +52,14 @@ router.post('/login', (req, res) => {
                 };
             });
     };
+});
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Buyers.remove(id)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(500).json(err));
 });
 
 module.exports = router;
