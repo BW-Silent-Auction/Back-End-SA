@@ -245,13 +245,128 @@ Cannot created_at, id, seller_id.
 `DEL /api/buyers/:id`
 
 ### Notes
-- 
+- Steps to safely rollback Heroku db
+    - git push development
+    - npx heroku run knex migrate:rollback
+    - npx knex migrate:rollback
+    - delete migration
+    - create migration
+    - paste last migration
+    - make changes to migration file
+    - npx knex migrate:latest
+    - update seed files
+    - npx knex seed:run
+    - check db with sqlitestudio
+    - git push development
+    - git merge
+    - npx heroku run knex migrate:latest bw-silent-auction
 
 ### Todo
-- Correct login endpoints to only send back appropriate information
-- Correct register to return the user
+- Correct register to return the user (check console log => heroku logs --tail)
 - Practice image upload with a mock front-end to determine proper db data-type
 - Add 'title' field to products db
 - Create delete user endpoint
 
-### Notepad
+### Most recent migration
+
+exports.up = function(knex) {
+    return knex.schema
+      .createTable('sellers', tbl => {
+          tbl.increments();
+          tbl
+              .string('username', 128)
+              .unique()
+              .notNullable();
+          tbl
+              .string('password', 128)
+              .notNullable();
+          tbl
+              .string('email', 128)
+              .unique()
+              .notNullable();
+          tbl
+              .string('first_name', 128)
+              .notNullable();
+          tbl
+              .string('last_name', 128)
+              .notNullable();
+      })
+      .createTable('buyers', tbl => {
+          tbl.increments();
+          tbl
+              .string('username', 128)
+              .unique()
+              .notNullable();
+          tbl
+              .string('password', 128)
+              .notNullable();
+          tbl
+              .string('email', 128)
+              .unique()
+              .notNullable();
+          tbl
+              .string('first_name', 128)
+              .notNullable();
+          tbl
+              .string('last_name', 128)
+              .notNullable();
+      })
+      .createTable('products', tbl => {
+          tbl.increments();
+          tbl
+              .integer('seller_id')
+              .unsigned()
+              .notNullable()
+              .references('id')
+              .inTable('sellers')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE');
+          tbl
+              .text('description', 2040)
+              .notNullable();
+          tbl
+              .decimal('starting_price')
+              .notNullable();
+          tbl
+              .binary('image');
+          tbl
+              .boolean('active')
+              .defaultTo(true)
+              .notNullable();
+          tbl
+              .timestamp('created_at')
+              .defaultTo(knex.fn.now())
+              .notNullable();
+      })
+      .createTable('product_bids', tbl => {
+          tbl.increments();
+          tbl
+              .integer('product_id')
+              .unsigned()
+              .notNullable()
+              .references('id')
+              .inTable('products')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE');
+          tbl
+              .integer('buyer_id')
+              .unsigned()
+              .notNullable()
+              .references('id')
+              .inTable('buyers')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE');
+          tbl
+              .decimal('bid_amount')
+              .notNullable()
+      });
+  };
+  
+  exports.down = function(knex) {
+    return knex.schema
+      .dropTableIfExists('product_bids')
+      .dropTableIfExists('products')
+      .dropTableIfExists('buyers')
+      .dropTableIfExists('sellers');
+  };
+  
