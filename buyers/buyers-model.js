@@ -10,17 +10,20 @@ module.exports = {
 };
 
 function find() {
-    return db('buyers');
+    return db('buyers')
+        .select('id', 'username', 'email', 'first_name', 'last_name');
 };
 
 function findBy(filter) {
     return db('buyers')
+        .select('id', 'username', 'email', 'first_name', 'last_name')
         .where(filter);
 };
 
 function findById(id) {
     return db('buyers')
         .where({ id })
+        .select('id', 'username', 'email', 'first_name', 'last_name')
         .first();
 };
 
@@ -28,14 +31,15 @@ function add(buyer) {
     return db('buyers')
         .insert(buyer)
         .then(id => {
-            return findById(id[0])
+            console.log(id);
+            return findById(id[0]);
         });
 };
 
 function update(id, changes) {
     return db('buyers')
         .where({ id })
-        .update(changes)
+        .update(changes);
 };
 
 function remove(id) {
