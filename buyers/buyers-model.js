@@ -30,6 +30,7 @@ function findById(id) {
 function add(buyer) {
     return db('buyers')
         .insert(buyer)
+        .returning('id')
         .then(id => {
             console.log('id: ', id);
             return findById(id[0]);
