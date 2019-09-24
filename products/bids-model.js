@@ -26,6 +26,7 @@ function findById(id) {
 function add(bid) {
     return db('product_bids')
         .insert(bid)
+        .returning('id')
         .then(id => {
             findById(id[0])
         })

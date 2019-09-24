@@ -27,6 +27,7 @@ function findById(id) {
 function add(product) {
     return db('products')
         .insert(product)
+        .returning('id')
         .then(id => {
             return findById(id[0])
         });

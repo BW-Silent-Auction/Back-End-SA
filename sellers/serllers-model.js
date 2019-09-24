@@ -36,8 +36,8 @@ function findPostsBySeller(id) {
 function add(seller) {
     return db('sellers')
         .insert(seller)
+        .returning('id')
         .then(id => {
-            console.log(id);
             return findById(id[0]);
         });
 };
