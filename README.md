@@ -65,7 +65,8 @@ Returns an array of all products from database. Example response body:
     {
         "id": 1,
         "seller_id": 3,
-        "description": "Playstation 4",
+        "title": "Playstation 4",
+        "desccription": "The fourth installment of the best console to date",
         "starting_price": 189.95,
         "image": null,
         "active": 1,
@@ -239,6 +240,8 @@ Requires authorization.
 
 `PUT /api/products/:id`
 
+Requires authorization.
+
 Requires at least one field to update. 
 
 Cannot created_at, id, seller_id.
@@ -246,6 +249,24 @@ Cannot created_at, id, seller_id.
 ### Delete buyer by ID
 
 `DEL /api/buyers/:id`
+
+Requires authorization.
+
+## HTTP status codes
+
+- `200 OK`
+    - The request has succeeded
+- `201 Created`
+    - The request succeeded and the new resource has been created
+- `400 Bad Request`
+    - The server could not understand the request due to invalid syntax
+    - The most likely cause is an improper request body
+- `401 Unauthorized`
+    - No authentication header was provided with the request
+- `404 Not found`
+    - The server could not find the requested resource
+- `500 Internal server error`
+    - The server has encountered a situation it doesn't know how to handle
 
 ### Notes
 - Steps to safely rollback Heroku db
@@ -268,8 +289,8 @@ Cannot created_at, id, seller_id.
 ### Todo
 - Correct register to return the user (check console log => heroku logs --tail)
 - Practice image upload with a mock front-end to determine proper db data-type
-- Add 'title' field to products db
-- Create delete user endpoint
+- Double check error codes and document in README
+- Add restricted middleware to appropriate routes
 
 ### Most recent migration
 
@@ -378,4 +399,3 @@ exports.up = function(knex) {
       .dropTableIfExists('sellers');
   };
   ```
-  

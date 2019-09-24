@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     Sellers.find()
         .then(success => res.status(200).json(success))
-        .catch(err => res.status(500).json(err))
+        .catch(err => res.status(500).json(err));
 });
 
 router.get('/:id', (req, res) => {
@@ -32,14 +32,14 @@ router.post('/register', (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        res.status(400).json({ error: 'Please provide the proper body with the request' })
+        res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         hash = bcrypt.hashSync(password);
         req.body.password = hash;
 
         Sellers.add(req.body)
             .then(success => res.status(201).json(success))
-            .catch(err => res.status(200).json(err));
+            .catch(err => res.status(500).json(err));
     };
 });
 
