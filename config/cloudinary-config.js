@@ -1,5 +1,6 @@
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
+console.log(cloudinaryStorage);
 const multer = require('multer');
 const secret = require('./secrets');
 
