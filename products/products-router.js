@@ -20,13 +20,14 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', parser, (req, res) => {
+    console.log(req.body);
     const { seller_id, description, starting_price } = req.body;
 
     if (!seller_id || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
-        req.body.image = req.body.image.name;
         console.log(req.body);
+        req.body.image = req.body.image.name;
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))
