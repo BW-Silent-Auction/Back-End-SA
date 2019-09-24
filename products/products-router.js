@@ -1,6 +1,5 @@
 const express = require('express');
-const multer = require('multer');
-const upload = multer({ pg: process.env.DATABASE_URL });
+const parser = require('../config/cloudinary-config');
 const Products = require('./products-model');
 const Bids = require('./bids-model');
 
@@ -20,13 +19,13 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', parser, (req, res) => {
     const { seller_id, description, starting_price } = req.body;
 
     if (!seller_id || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
-        req.body.image = req.body.image.buffer;
+        req.body.image = req.body.image.name;
         console.log(req.body);
 
         Products.add(req.body)
