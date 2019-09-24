@@ -27,6 +27,7 @@ router.post('/', parser, (req, res) => {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         console.log(req.body.image);
+        const { file } = req.body.image;
         req.body.image = req.body.image.name;
 
         Products.add(req.body)
