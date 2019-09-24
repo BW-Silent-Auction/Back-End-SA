@@ -13,13 +13,17 @@ module.exports = {
 function find() {
     return db('products')
         .then(auctions => {
+            console.log(auctions);
             auctions.map(auc => {
-                if (auc.image == null) {
+                console.log(auc);
+                if (auc.image === null) {
                     return auc;
                 } else {
                     const readStream = new stream.PassThrough();
                     auc.image = Buffer.from(auc.image, base64);
+                    console.log(auc);
                     readStream.end(auc.image);
+                    console.log(auc);
                     return auc;
                 };
             });
