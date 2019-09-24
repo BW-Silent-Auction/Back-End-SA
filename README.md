@@ -34,9 +34,9 @@ Required fields: `username`, `password`
 Example request body:
 ```
 {
-	"username": "alex",
-	"password": "password",
-    "email": "alex@alex.com,
+    "username": "alex",
+    "password": "password",
+    "email": "alex@alex.com",
     "first_name": "Alex",
     "last_name": "Gordon"
 }
@@ -289,8 +289,8 @@ Requires authorization.
 ### Todo
 - Correct register to return the user (check console log => heroku logs --tail)
 - Practice image upload with a mock front-end to determine proper db data-type
-- Double check error codes and document in README
 - Add restricted middleware to appropriate routes
+- Send bidder(buyer) information back with bids
 
 ### Most recent migration
 
