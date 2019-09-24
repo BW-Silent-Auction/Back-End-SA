@@ -27,6 +27,7 @@ router.post('/', upload.single('image'), (req, res) => {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         req.body.image = req.body.image.buffer;
+        console.log(req.body);
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))
