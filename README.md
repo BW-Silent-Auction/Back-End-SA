@@ -112,6 +112,7 @@ Returns the new Product object. Example response body:
 {
     "id": 2,
     "seller_id": 5,
+    "title": "iPhone 11",
     "description": "The greatest iPhone yet",
     "starting_price": 1150.95,
     "image": null,
@@ -134,6 +135,7 @@ Returns the Product object. Example response body:
 {
     "id": 2,
     "seller_id": 5,
+    "title": "iPhone 11",
     "description": "The greatest iPhone yet",
     "starting_price": 1150.95,
     "image": null,
@@ -215,6 +217,7 @@ Returns an Array of all products previously posted by a specific seller. Example
     {
         "id": 2,
         "seller_id": 5,
+        "title": "iPhone 11",
         "description": "The greatest iPhone yet",
         "starting_price": 1150.95,
         "image": null,
@@ -247,9 +250,10 @@ Cannot created_at, id, seller_id.
 ### Notes
 - Steps to safely rollback Heroku db
     - git push development
-    - npx heroku run knex migrate:rollback
+    - npx heroku run knex migrate:rollback -a bw-silent-auction
     - npx knex migrate:rollback
     - delete migration
+    - delete local database
     - create migration
     - paste last migration
     - make changes to migration file
@@ -259,7 +263,7 @@ Cannot created_at, id, seller_id.
     - check db with sqlitestudio
     - git push development
     - git merge
-    - npx heroku run knex migrate:latest bw-silent-auction
+    - npx heroku run knex migrate:latest -a bw-silent-auction
 
 ### Todo
 - Correct register to return the user (check console log => heroku logs --tail)
@@ -269,6 +273,7 @@ Cannot created_at, id, seller_id.
 
 ### Most recent migration
 
+```
 exports.up = function(knex) {
     return knex.schema
       .createTable('sellers', tbl => {
@@ -322,6 +327,9 @@ exports.up = function(knex) {
               .onUpdate('CASCADE')
               .onDelete('CASCADE');
           tbl
+              .string('title', 255)
+              .notNullable();
+          tbl
               .text('description', 2040)
               .notNullable();
           tbl
@@ -369,4 +377,5 @@ exports.up = function(knex) {
       .dropTableIfExists('buyers')
       .dropTableIfExists('sellers');
   };
+  ```
   
