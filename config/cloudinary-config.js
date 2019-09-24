@@ -4,11 +4,11 @@ console.log(cloudinaryStorage);
 const multer = require('multer');
 const secret = require('./secrets');
 
-cloudinary.config({
-    cloud_name: secret.cloudinaryName,
-    api_key: secret.cloudinaryApiKey,
-    api_secret: secret.cloudinarySecret
-});
+// cloudinary.config({
+//     cloud_name: secret.cloudinaryName,
+//     api_key: secret.cloudinaryApiKey,
+//     api_secret: secret.cloudinarySecret
+// });
 
 const storage = cloudinaryStorage({
     cloudinary,
