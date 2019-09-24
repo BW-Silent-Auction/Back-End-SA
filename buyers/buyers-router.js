@@ -54,4 +54,12 @@ router.post('/login', (req, res) => {
     };
 });
 
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Buyers.remove(id)
+        .then(success => res.status(200).json(success))
+        .catch(err => res.status(500).json(err));
+});
+
 module.exports = router;
