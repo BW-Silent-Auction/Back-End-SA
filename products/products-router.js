@@ -21,14 +21,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/', parser, (req, res) => {
     console.log(req.body);
+    console.log('req.file: ', req.file);
     const { seller_id, description, starting_price } = req.body;
 
     if (!seller_id || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         console.log(req.body.image);
-        const { file } = req.body.image;
-        req.body.image = req.body.image.name;
+        req.body.image = req.file.name;
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))
