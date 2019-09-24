@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ pg: process.env.DATABASE_URL });
 const Products = require('./products-model');
 const Bids = require('./bids-model');
 
@@ -18,12 +20,14 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.post('/', (req, res) => {
+router.post('/', upload.single('image'), (req, res) => {
     const { seller_id, description, starting_price } = req.body;
 
     if (!seller_id || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
+        req.body.image = req.body.image.buffer;
+
         Products.add(req.body)
             .then(success => res.status(201).json(success))
             .catch(err => res.status(500).json(err));
@@ -32,7 +36,6 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    console.log(id);
 
     Products.remove(id)
         .then(success => {

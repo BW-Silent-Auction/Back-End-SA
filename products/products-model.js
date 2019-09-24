@@ -1,4 +1,5 @@
 const db = require('../data/db-config');
+const stream = require('stream');
 
 module.exports = {
     find,
@@ -10,7 +11,19 @@ module.exports = {
 };
 
 function find() {
-    return db('products');
+    return db('products')
+        .then(auctions => {
+            auctions.map(auc => {
+                if (auc.image == null) {
+                    return auc;
+                } else {
+                    const readStream = new stream.PassThrough();
+                    auc.image = Buffer.from(auc.image, base64);
+                    readStream.end(auc.image);
+                    return auc;
+                };
+            });
+        });
 };
 
 function findBy(filter) {
