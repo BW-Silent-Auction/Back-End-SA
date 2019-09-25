@@ -290,6 +290,7 @@ Requires authorization.
 - Add restricted middleware to appropriate routes
 - I believe I can remove the get/bids endpoint
     - Will confirm with F/E
+- Create a conditional else/if for if an req.body.image === null
 
 ### Most recent migration
 

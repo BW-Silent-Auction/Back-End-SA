@@ -6,6 +6,6 @@ module.exports = id => {
         .then(product => {
             const req = { active: false };
 
-            setTimeout(() => {Products.update(product.id, req)}, 1000 * 10)
+            return setTimeout(() => {Products.update(product.id, req)}, 1000 * 10);
         });
 };
