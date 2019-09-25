@@ -22,7 +22,21 @@ Example request body:
 	"password": "password"
 }
 ```
-No authentication required, returns a JSON web token
+No authentication required. Returns an Object with user and token key:value pairs. Example response body:
+
+```
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+    "user": {
+        "id": 9,
+        "username": "alex",
+        "password": "$2a$10$/6Sc0N0g7EdB/gVHclQtfOBTY1PxRBE2RWWcZe2zRIDC6RWO97Qg.",
+        "email": "alex@alex.com",
+        "first_name": "Alex",
+        "last_name": "Gordon"
+    }
+}
+```
 
 Required fields: `username`, `password`
 
@@ -69,7 +83,8 @@ Returns an array of all products from database. Example response body:
         "desccription": "The fourth installment of the best console to date",
         "starting_price": 189.95,
         "image": null,
-        "active": 1,
+        "duration": 7,
+        "active": true,
         "created_at": "2019-09-22 11:42:12"
     },
     {
@@ -79,7 +94,8 @@ Returns an array of all products from database. Example response body:
         "description": "The greatest iPhone yet",
         "starting_price": 1150.95,
         "image": null,
-        "active": 1,
+        "duration": 5,
+        "active": true,
         "created_at": "2019-09-23 22:37:57"
     },
 ]
@@ -101,7 +117,8 @@ Example request body:
     "title": "iPhone 11",
     "description": "The greatest iPhone yet",
     "image": file,
-    "starting_price": 1150.95
+    "starting_price": 1150.95,
+    "duration": 5
 }
 ```
 
@@ -116,7 +133,8 @@ Returns the new Product object. Example response body:
     "title": "iPhone 11",
     "description": "The greatest iPhone yet",
     "starting_price": 1150.95,
-    "image": null,
+    "image": url,
+    "duration": 5,
     "active": 1,
     "created_at": "2019-09-23 22:37:57"
 }
@@ -126,11 +144,11 @@ Returns the new Product object. Example response body:
 
 `GET /api/products/:id`
 
-Requires authentication. 
+Requires authentication.
 
 req.header.authorization = token;
 
-Returns the Product object. Example response body:
+Returns the Product object with all bids for that product. Example response body:
 
 ```
 {
@@ -140,8 +158,29 @@ Returns the Product object. Example response body:
     "description": "The greatest iPhone yet",
     "starting_price": 1150.95,
     "image": null,
+    "duration": 5,
     "active": 1,
-    "created_at": "2019-09-23 22:37:57"
+    "created_at": "2019-09-23 22:37:57",
+    "bids": [
+        {
+            "id": 2,
+            "product_id": 2,
+            "buyer_id": 2,
+            "bid_amount": 1165.95
+        },
+        {
+            "id": 3,
+            "product_id": 2,
+            "buyer_id": 3,
+            "bid_amount": 1170.95
+        },
+        {
+            "id": 12,
+            "product_id": 2,
+            "buyer_id": 4,
+            "bid_amount": 1180.95
+        }
+    ]
 }
 ```
 
@@ -157,12 +196,6 @@ Returns an Array of all bids placed on a specific product. Example response body
 
 ```
 [
-    {
-        "id": 1,
-        "product_id": 2,
-        "buyer_id": 1,
-        "bid_amount": 1160.95
-    },
     {
         "id": 2,
         "product_id": 2,
@@ -222,6 +255,7 @@ Returns an Array of all products previously posted by a specific seller. Example
         "description": "The greatest iPhone yet",
         "starting_price": 1150.95,
         "image": null,
+        "duration": 7,
         "active": 1,
         "created_at": "2019-09-23 22:37:57"
     },
@@ -362,6 +396,9 @@ exports.up = function (knex) {
             tbl
                 .boolean('active')
                 .defaultTo(true)
+                .notNullable();
+            tbl
+                .integer('duration')
                 .notNullable();
             tbl
                 .timestamp('created_at')

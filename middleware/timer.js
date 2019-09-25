@@ -10,14 +10,5 @@ module.exports = id => {
         console.log('timer 10: ', req);
         console.log(id);
         await Products.update(id, req);
-        // value === 'foobar' (passing values is optional)
-        // This is executed after about 40 milliseconds.
     });
-
-    // Products.findBy(id)
-    //     .then(product => {
-    //         const req = { active: false };
-
-    //         return setTimeout(() => {Products.update(product.id, req)}, 1000 * 10);
-    //     });
 };
