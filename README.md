@@ -291,6 +291,7 @@ Requires authorization.
 - I believe I can remove the get/bids endpoint
     - Will confirm with F/E
 - Create a conditional else/if for if an req.body.image === null
+- Resolve back-end timer function
 
 ### Most recent migration
 
