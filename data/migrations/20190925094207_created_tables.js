@@ -61,7 +61,7 @@ exports.up = function (knex) {
                 .decimal('starting_price')
                 .notNullable();
             tbl
-                .binary('image');
+                .string('image', 255);
             tbl
                 .boolean('active')
                 .defaultTo(true)
