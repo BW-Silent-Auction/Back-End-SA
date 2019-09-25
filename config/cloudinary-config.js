@@ -6,16 +6,16 @@ const storage = cloudinaryStorage({
     cloudinary,
     folder: 'bw-silent-auction',
     allowedFormats: ['jpg', 'png'],
-    filename: function (req, file, cb) {
-        console.log('fi: ', file.mimetype);
-        if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
-            cb(null, true)
-        } else {
-            const err = new Error();
-            err.message = 'Invalid image type. Ensure the image is either jpg or png';
-            cb(err.message, false)
-        };
-    },
+    // filename: function (req, file, cb) {
+    //     console.log('fi: ', file.mimetype);
+    //     if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    //         cb(req.file.name, true)
+    //     } else {
+    //         const err = new Error();
+    //         err.message = 'Invalid image type. Ensure the image is either jpg or png';
+    //         cb(err.message, false)
+    //     };
+    // },
 });
 
 const parser = multer({ storage });
