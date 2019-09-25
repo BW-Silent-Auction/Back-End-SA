@@ -319,13 +319,13 @@ Requires authorization.
     - git push development
     - git merge
     - npx heroku run knex migrate:latest -a bw-silent-auction
+    - npx heroku run knex seed:run -a bw-silent-auction
 
 ### Todo
 - Add restricted middleware to appropriate routes
 - I believe I can remove the get/bids endpoint
     - Will confirm with F/E
 - Create a conditional else/if for if an req.body.image === null
-- Resolve back-end timer function
 
 ### Most recent migration
 

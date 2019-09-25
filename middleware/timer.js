@@ -3,7 +3,7 @@ const Products = require('../products/products-model');
 
 const setTimeoutPromise = util.promisify(setTimeout);
 
-module.exports = (id, duration) => {
+module.exports = (duration, id) => {
     console.log('timer 4: ', id);
     setTimeoutPromise(1000 * 60 * 60 * 24 * duration, id).then(async (id) => {
         const req = { active: false };
