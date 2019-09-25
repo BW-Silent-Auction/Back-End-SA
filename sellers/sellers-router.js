@@ -49,7 +49,7 @@ router.post('/login', (req, res) => {
     if (!username || !password) {
         res.status(400).json({ error: 'Please provide the proper body with your request' });
     } else {
-        Sellers.findBy({ username })
+        Sellers.logIn({ username })
             .first()
             .then(seller => {
                 if (seller && bcrypt.compareSync(password, seller.password)) {
