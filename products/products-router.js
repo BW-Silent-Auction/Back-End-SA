@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
     const { id } = req.params;
     
     Products.findById(id)
-        .then(success => res.status(200).json(success))
+        .then(success => res.status(200).json(success[0]))
         .catch(err => res.status(500).json(err));
 });
 

@@ -1,12 +1,12 @@
-const db = require('../data/db-config');
 const Products = require('../products/products-model');
 
-module.exports = async product => {
+module.exports = product => {
     const { id } = product;
+    console.log(id);
     await Products.findBy(id)
         .then(product => {
             const req = { active: false };
 
-            setTimeout(() => {Products.update(product.id, req)}, 1000 * 60)
+            setTimeout(() => {Products.update(product.id, req)}, 1000 * 10)
         });
 };
