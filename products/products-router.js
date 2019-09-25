@@ -32,7 +32,7 @@ router.post('/', parser, (req, res) => {
         Products.add(req.body)
             .then(success => {
                 res.status(201).json(success[0]);
-                timer(success.duration, success[0].id);
+                timer(success[0].duration, success[0].id);
             })
             .catch(err => res.status(500).json(err));
     };
