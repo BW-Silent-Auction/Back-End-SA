@@ -1,7 +1,6 @@
 const Products = require('../products/products-model');
 
-module.exports = product => {
-    const { id } = product;
+module.exports = id => {
     console.log(id);
     Products.findBy(id)
         .then(product => {
