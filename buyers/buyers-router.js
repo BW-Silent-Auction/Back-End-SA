@@ -41,6 +41,7 @@ router.post('/login', (req, res) => {
     if (!username || !password) {
         res.status(400).json({ error: 'Please provide the proper body with your request' });
     } else {
+        console.log({ username });
         Buyers.findBy({ username })
             .first()
             .then(buyer => {

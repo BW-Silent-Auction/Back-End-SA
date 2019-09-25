@@ -287,7 +287,7 @@ Requires authorization.
     - npx heroku run knex migrate:latest -a bw-silent-auction
 
 ### Todo
-- Practice image upload with a mock front-end to determine proper db data-type
+- Rollback database and change 'image' column to be string
 - Add restricted middleware to appropriate routes
 - Send bidder(buyer) information back with bids
 
