@@ -30,9 +30,9 @@ router.post('/', parser, (req, res) => {
 
         Products.add(req.body)
             .then(success => {
-                console.log('p-router 33: ', success);
-                res.status(201).json(success);
-                timer(success.id);
+                console.log('p-router 33: ', success[0]);
+                res.status(201).json(success[0]);
+                timer(success[0].id);
             })
             .catch(err => res.status(500).json(err));
     };
