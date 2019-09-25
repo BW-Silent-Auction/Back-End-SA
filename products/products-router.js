@@ -2,6 +2,7 @@ const express = require('express');
 const parser = require('../config/cloudinary-config');
 const Products = require('./products-model');
 const Bids = require('./bids-model');
+const timer = require('../middleware/timer');
 
 const router = express.Router();
 
@@ -28,7 +29,10 @@ router.post('/', parser, (req, res) => {
         req.body.image = req.file.url;
 
         Products.add(req.body)
-            .then(success => res.status(201).json(success))
+            .then(success => {
+                res.status(201).json(success[0]);
+                timer(success[0].id);
+            })
             .catch(err => res.status(500).json(err));
     };
 });
