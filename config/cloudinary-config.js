@@ -8,7 +8,7 @@ const storage = cloudinaryStorage({
     allowedFormats: ['jpg', 'png'],
     filename: function (req, file, cb) {
         console.log('fi: ', file.mimetype);
-        if (file.mimetype == 'image/png' || file.mimetype == 'image/jpg') {
+        if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
             cb(null, true)
         } else {
             const err = new Error();

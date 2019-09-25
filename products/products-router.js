@@ -27,8 +27,9 @@ router.post('/', parser, (req, res) => {
     if (!seller_id || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
-        console.log(req.body.image);
-        req.body.image = req.file.name;
+        console.log('30 ', req.body.image);
+        req.body.image = req.file.url;
+        console.log('32 ', req.body.image)
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))
