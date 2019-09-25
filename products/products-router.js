@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', parser, (req, res) => {
-    console.log(req.body);
+    console.log('req.body ', req.body);
     console.log('req.file: ', req.file);
     const { seller_id, description, starting_price } = req.body;
 
@@ -29,7 +29,7 @@ router.post('/', parser, (req, res) => {
     } else {
         console.log('30 ', req.body.image);
         req.body.image = req.file.url;
-        console.log('32 ', req.body.image)
+        console.log('32 ', req.body.image);
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))
