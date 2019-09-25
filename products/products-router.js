@@ -21,9 +21,9 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', parser, (req, res) => {
-    const { seller_id, title, description, starting_price } = req.body;
+    const { seller_id, title, description, starting_price, duration } = req.body;
 
-    if (!seller_id || !title || !description || !starting_price) {
+    if (!seller_id || !title || !description || !starting_price || !duration) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
         req.body.image = req.file.url;
@@ -31,7 +31,7 @@ router.post('/', parser, (req, res) => {
         Products.add(req.body)
             .then(success => {
                 res.status(201).json(success[0]);
-                timer(success[0].id);
+                timer(success.duration, success[0].id);
             })
             .catch(err => res.status(500).json(err));
     };

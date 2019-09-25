@@ -278,7 +278,7 @@ Requires authorization.
 
 Requires at least one field to update. 
 
-Cannot created_at, id, seller_id.
+Cannot edit created_at, id, seller_id.
 
 ### Delete buyer by ID
 
