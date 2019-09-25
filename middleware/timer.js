@@ -3,7 +3,7 @@ const Products = require('../products/products-model');
 module.exports = product => {
     const { id } = product;
     console.log(id);
-    await Products.findBy(id)
+    Products.findBy(id)
         .then(product => {
             const req = { active: false };
 
