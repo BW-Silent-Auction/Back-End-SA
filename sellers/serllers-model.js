@@ -35,6 +35,7 @@ function findById(id) {
 };
 
 function findPostsBySeller(id) {
+    console.log(id)
     return db('products')
         .where({ seller_id: id });
 };

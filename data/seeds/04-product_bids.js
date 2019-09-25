@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-  return knex('product_bids').truncate()
+  return knex('product_bids').del()
     .then(function () {
       return knex('product_bids').insert([
         { product_id: 1, buyer_id: 1, bid_amount: 24.95 },

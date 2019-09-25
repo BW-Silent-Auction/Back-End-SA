@@ -21,6 +21,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', parser, (req, res) => {
+    console.log(req.body);
     const { seller_id, title, description, starting_price, duration } = req.body;
 
     if (!seller_id || !title || !description || !starting_price || !duration) {

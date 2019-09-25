@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-  return knex('products').truncate()
+  return knex('products').del()
     .then(function () {
       return knex('products').insert([
         { seller_id: 1, title: 'test-title-1', description: "Test seed for product with the id:1 from the seller with the id:1", starting_price: 19.95, duration: 3 },
