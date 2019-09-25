@@ -394,11 +394,11 @@ exports.up = function (knex) {
             tbl
                 .string('image', 255);
             tbl
-                .boolean('active')
-                .defaultTo(true)
+                .integer('duration')
                 .notNullable();
             tbl
-                .integer('duration')
+                .boolean('active')
+                .defaultTo(true)
                 .notNullable();
             tbl
                 .timestamp('created_at')

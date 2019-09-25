@@ -63,6 +63,9 @@ exports.up = function (knex) {
             tbl
                 .string('image', 255);
             tbl
+                .integer('duration')
+                .notNullable();
+            tbl
                 .boolean('active')
                 .defaultTo(true)
                 .notNullable();
