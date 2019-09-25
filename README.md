@@ -287,9 +287,9 @@ Requires authorization.
     - npx heroku run knex migrate:latest -a bw-silent-auction
 
 ### Todo
-- Rollback database and change 'image' column to be string
 - Add restricted middleware to appropriate routes
-- Send bidder(buyer) information back with bids
+- I believe I can remove the get/bids endpoint
+    - Will confirm with F/E
 
 ### Most recent migration
 
@@ -356,7 +356,7 @@ exports.up = function (knex) {
                 .decimal('starting_price')
                 .notNullable();
             tbl
-                .binary('image');
+                .string('image', 255);
             tbl
                 .boolean('active')
                 .defaultTo(true)

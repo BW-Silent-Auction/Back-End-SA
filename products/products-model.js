@@ -15,13 +15,18 @@ function find() {
 
 function findBy(filter) {
     return db('products')
-        .where(filter);
+        .where(filter)
 };
 
 function findById(id) {
     return db('products')
         .where({ id })
-        .first();
+
+        .then(async product => {
+            product[0].bids = await db('product_bids').where({ product_id: product[0].id });
+
+            return product
+        });
 };
 
 function add(product) {

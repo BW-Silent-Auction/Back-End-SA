@@ -20,16 +20,12 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', parser, (req, res) => {
-    console.log('23 req.body ', req.body);
-    console.log('24 req.file: ', req.file);
     const { seller_id, title, description, starting_price } = req.body;
 
     if (!seller_id || !title || !description || !starting_price) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });
     } else {
-        console.log('30 req.body.image', req.body.image);
         req.body.image = req.file.url;
-        console.log('32 req.body.image', req.body.image);
 
         Products.add(req.body)
             .then(success => res.status(201).json(success))

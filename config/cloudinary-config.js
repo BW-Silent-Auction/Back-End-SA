@@ -7,7 +7,6 @@ const storage = cloudinaryStorage({
     folder: 'bw-silent-auction',
     allowedFormats: ['jpg', 'png'],
     filename: function (req, file, cb) {
-        console.log('10 fi: ', file.mimetype);
         if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
             cb(null, file.url)
         } else {
