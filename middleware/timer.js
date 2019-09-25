@@ -5,11 +5,11 @@ const setTimeoutPromise = util.promisify(setTimeout);
 
 module.exports = id => {
     console.log('timer 4: ', id);
-    setTimeoutPromise(1000 * 10, id).then((id) => {
+    setTimeoutPromise(1000 * 10, id).then(async (id) => {
         const req = { active: false };
         console.log('timer 10: ', req);
         console.log(id);
-        Products.update(id, req);
+        await Products.update(id, req);
         // value === 'foobar' (passing values is optional)
         // This is executed after about 40 milliseconds.
     });
