@@ -7,14 +7,14 @@ exports.seed = function(knex) {
         { username: "cameron", password: "password", email: "cameron@test.com", first_name: "Cameron", last_name: "Alvarado" },
         { username: "dominique", password: "password", email: "dominique@test.com", first_name: "Dominique", last_name: "Maack" },
         { username: "chao", password: "password", email: "chao@test.com", first_name: "Chao", last_name: "Ji" },
-        { username: "test-buyer-1", password: "test", email: "test1@test.com", first_name: "Alfred", last_name: "Pennyworth" },
-        { username: "test-buyer-2", password: "test", email: "test2@test.com", first_name: "Bruce", last_name: "Wayne" },
-        { username: "test-buyer-3", password: "test", email: "test3@test.com", first_name: "Harvey", last_name: "Dent" },
-        { username: "test-buyer-4", password: "test", email: "test4@test.com", first_name: "James", last_name: "Gordon" },
-        { username: "test-buyer-5", password: "test", email: "test5@test.com", first_name: "Poison", last_name: "Ivy" },
-        { username: "test-buyer-6", password: "test", email: "test6@test.com", first_name: "Ra's al", last_name: "Ghul" },
-        { username: "test-buyer-7", password: "test", email: "test7@test.com", first_name: "Oswald", last_name: "Cobblepot" },
-        { username: "test-buyer-8", password: "test", email: "test8@test.com", first_name: "Lucius", last_name: "Fox" },
+        { username: "austen", password: "password", email: "austen@test.com", first_name: "Austen", last_name: "Allred" },
+        { username: "steven", password: "password", email: "steven@test.com", first_name: "Steven", last_name: "Jefferson" },
+        { username: "steve", password: "password", email: "steve@test.com", first_name: "Steve", last_name: "Moorehead" },
+        { username: "ryan", password: "password", email: "ryan@test.com", first_name: "Ryan", last_name: "McLaughlin" },
+        { username: "alexis", password: "password", email: "alexis@test.com", first_name: "Alexis", last_name: "Carr" },
+        { username: "cam", password: "password", email: "cam@test.com", first_name: "Cam", last_name: "Perry" },
+        { username: "john", password: "password", email: "jonathan@test.com", first_name: "Jonathan", last_name: "Taylor" },
+        { username: "bigtimebuyer123", password: "password", email: "ryanh@test.com", first_name: "Ryan", last_name: "Hamblin" },
       ]);
     });
 };
