@@ -93,10 +93,10 @@ exports.up = function (knex) {
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
             tbl
-                .string('buyer_name')
+                .string('buyer_username')
                 .unsigned()
                 .notNullable()
-                .references('name')
+                .references('username')
                 .inTable('buyers')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
