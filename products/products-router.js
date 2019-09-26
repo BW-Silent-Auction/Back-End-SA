@@ -22,7 +22,6 @@ router.get('/:id', (req, res) => {
 
 router.post('/', parser, (req, res) => {
     const { seller_id, title, description, starting_price, image, duration } = req.body;
-    console.log('prod-router 25: ', image);
 
     if (!seller_id || !title || !description || !starting_price || !duration) {
         res.status(400).json({ error: 'Please provide the proper body with the request' });

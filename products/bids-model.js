@@ -28,6 +28,8 @@ function add(bid) {
         .insert(bid)
         .returning('id')
         .then(id => {
-            findById(id[0])
+            console.log(id);
+            return id;
+            // findById(id[0])
         })
 };
