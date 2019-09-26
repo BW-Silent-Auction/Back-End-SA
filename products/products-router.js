@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', parser, (req, res) => {
     const { id } = req.params;
 
     if (req.body.created_at || req.body.id || req.body.seller_id) {
