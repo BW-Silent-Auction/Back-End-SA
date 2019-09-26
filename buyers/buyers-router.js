@@ -2,17 +2,18 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const Buyers = require('./buyers-model');
+const restricted = require('../middleware/restricted');
 const generateToken = require('../auth/generateToken');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Buyers.find()
         .then(success => res.status(200).json(success))
         .catch(err => res.status(500).json(err));
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     const { id } = req.params;
     
     Buyers.findById(id)
@@ -55,7 +56,7 @@ router.post('/login', (req, res) => {
     };
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params;
 
     Buyers.remove(id)

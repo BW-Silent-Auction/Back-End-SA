@@ -137,7 +137,7 @@ Returns the new Product object. Example response body:
     "starting_price": 1150.95,
     "image": url,
     "duration": 5,
-    "active": 1,
+    "active": true,
     "created_at": "2019-09-23 22:37:57"
 }
 ```
@@ -161,7 +161,7 @@ Returns the Product object with all bids for that product. Example response body
     "starting_price": 1150.95,
     "image": null,
     "duration": 5,
-    "active": 1,
+    "active": true,
     "created_at": "2019-09-23 22:37:57",
     "bids": [
         {
@@ -258,7 +258,7 @@ Returns an Array of all products previously posted by a specific seller. Example
         "starting_price": 1150.95,
         "image": null,
         "duration": 7,
-        "active": 1,
+        "active": true,
         "created_at": "2019-09-23 22:37:57"
     },
 ]
@@ -303,6 +303,3 @@ Requires authorization.
     - The server could not find the requested resource
 - `500 Internal server error`
     - The server has encountered a situation it doesn't know how to handle
-
-### Todo
-- Add restricted middleware to appropriate routes

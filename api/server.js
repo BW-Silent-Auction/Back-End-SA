@@ -5,6 +5,7 @@ const cors = require('cors');
 const sellersRouter = require('../sellers/sellers-router');
 const buyersRouter = require('../buyers/buyers-router');
 const productsRouter = require('../products/products-router');
+const restricted = require('../middleware/restricted');
 
 const server = express();
 
@@ -18,6 +19,6 @@ server.get('/', (req, res) => {
 
 server.use('/api/sellers', sellersRouter);
 server.use('/api/buyers', buyersRouter);
-server.use('/api/products', productsRouter);
+server.use('/api/products', restricted, productsRouter);
 
 module.exports = server;

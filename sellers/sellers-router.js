@@ -2,17 +2,18 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const Sellers = require('./serllers-model');
+const restricted = require('../middleware/restricted');
 const generateToken = require('../auth/generateToken');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Sellers.find()
         .then(success => res.status(200).json(success))
         .catch(err => res.status(500).json(err));
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', restricted, (req, res) => {
     const { id } = req.params;
 
     Sellers.findById(id)
@@ -20,7 +21,7 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-router.get('/:id/auctions', (req, res) => {
+router.get('/:id/auctions', restricted, (req, res) => {
     const { id } = req.params;
 
     Sellers.findPostsBySeller(id)
