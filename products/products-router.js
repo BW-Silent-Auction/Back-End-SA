@@ -59,12 +59,14 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', parser, (req, res) => {
+    console.log(req.file);
     const { id } = req.params;
 
     if (req.body.created_at || req.body.id || req.body.seller_id) {
         res.status(400).json({ error: 'Those fields are not editable' });
     } else {
         req.body.image = req.file.url;
+        console.log(req.body);
 
         Products.update(id, req.body)
             .then(success => res.status(200).json(success))
