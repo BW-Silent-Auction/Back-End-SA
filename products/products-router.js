@@ -64,6 +64,8 @@ router.put('/:id', parser, (req, res) => {
     if (req.body.created_at || req.body.id || req.body.seller_id) {
         res.status(400).json({ error: 'Those fields are not editable' });
     } else {
+        req.body.image = req.file.url;
+
         Products.update(id, req.body)
             .then(success => res.status(200).json(success))
             .catch(err => res.status(500).json(err));
