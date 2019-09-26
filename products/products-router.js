@@ -59,13 +59,22 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', parser, (req, res) => {
-    console.log(req.file);
+    console.log('62', req.file);
     const { id } = req.params;
 
     if (req.body.created_at || req.body.id || req.body.seller_id) {
         res.status(400).json({ error: 'Those fields are not editable' });
     } else {
-        req.body.image = req.file.url;
+        if (req.file) {
+            req.body.image = req.file.url;
+            console.log('70', req.file);
+            console.log('71', req.body);
+
+            Products.update(id, req.body)
+                .then(success => res.status(200).json(success))
+                .catch(err => res.status(500).json(err));
+
+        }
         console.log(req.body);
 
         Products.update(id, req.body)
