@@ -30,7 +30,6 @@ No authentication required. Returns an Object with user and token key:value pair
     "user": {
         "id": 9,
         "username": "alex",
-        "password": "$2a$10$/6Sc0N0g7EdB/gVHclQtfOBTY1PxRBE2RWWcZe2zRIDC6RWO97Qg.",
         "email": "alex@alex.com",
         "first_name": "Alex",
         "last_name": "Gordon"
