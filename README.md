@@ -3,6 +3,9 @@
 ## VISION
 Create an application that connects buyers and sellers for transactions in a silent auction format.
 
+## ABOUT
+To contribute or utilize this project, clone and download the git repository. Run `npm install` to download the necessary dependencies. Type `npm run server` in the command line to start the server on localhost:4200. Familiarize yourself with the file-structure and enjoy!
+
 ---
 
 ## HEROKU BASE_URL
@@ -301,26 +304,5 @@ Requires authorization.
 - `500 Internal server error`
     - The server has encountered a situation it doesn't know how to handle
 
-### Notes
-- Steps to safely rollback Heroku db
-    - git push development
-    - npx heroku run knex migrate:rollback -a bw-silent-auction
-    - npx knex migrate:rollback
-    - delete migration
-    - delete local database
-    - create migration
-    - paste last migration
-    - make changes to migration file
-    - npx knex migrate:latest
-    - update seed files
-    - npx knex seed:run
-    - check db with sqlitestudio
-    - git push development
-    - git merge
-    - npx heroku run knex migrate:latest -a bw-silent-auction
-    - npx heroku run knex seed:run -a bw-silent-auction
-
 ### Todo
 - Add restricted middleware to appropriate routes
-- I believe I can remove the get/bids endpoint
-    - Will confirm with F/E
