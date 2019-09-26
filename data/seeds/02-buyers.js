@@ -3,6 +3,10 @@ exports.seed = function(knex) {
   return knex('buyers').del()
     .then(function () {
       return knex('buyers').insert([
+        { username: "alex", password: "password", email: "alex@test.com", first_name: "Alex", last_name: "Gordon" },
+        { username: "cameron", password: "password", email: "cameron@test.com", first_name: "Cameron", last_name: "Alvarado" },
+        { username: "dominique", password: "password", email: "dominique@test.com", first_name: "Dominique", last_name: "Maack" },
+        { username: "chao", password: "password", email: "chao@test.com", first_name: "Chao", last_name: "Ji" },
         { username: "test-buyer-1", password: "test", email: "test1@test.com", first_name: "Alfred", last_name: "Pennyworth" },
         { username: "test-buyer-2", password: "test", email: "test2@test.com", first_name: "Bruce", last_name: "Wayne" },
         { username: "test-buyer-3", password: "test", email: "test3@test.com", first_name: "Harvey", last_name: "Dent" },
