@@ -59,7 +59,6 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', parser, (req, res) => {
-    console.log('62', req.file);
     const { id } = req.params;
 
     if (req.body.created_at || req.body.id || req.body.seller_id) {
@@ -67,19 +66,16 @@ router.put('/:id', parser, (req, res) => {
     } else {
         if (req.file) {
             req.body.image = req.file.url;
-            console.log('70', req.file);
-            console.log('71', req.body);
 
             Products.update(id, req.body)
                 .then(success => res.status(200).json(success))
                 .catch(err => res.status(500).json(err));
 
+        } else {
+            Products.update(id, req.body)
+                .then(success => res.status(200).json(success))
+                .catch(err => res.status(500).json(err));
         }
-        console.log(req.body);
-
-        Products.update(id, req.body)
-            .then(success => res.status(200).json(success))
-            .catch(err => res.status(500).json(err));
     };
 });
 
@@ -112,21 +108,3 @@ router.post('/:id/bids', (req, res) => {
 });
 
 module.exports = router;
-
-
-router.post('/', parser, (req, res) => {
-    const { seller_id, title, description, starting_price, duration } = req.body;
-
-    if (!seller_id || !title || !description || !starting_price || !duration) {
-        res.status(400).json({ error: 'Please provide the proper body with the request' });
-    } else {
-        req.body.image = req.file.url;
-
-        Products.add(req.body)
-            .then(success => {
-                res.status(201).json(success[0]);
-                timer(success[0].duration, success[0].id);
-            })
-            .catch(err => res.status(500).json(err));
-    };
-});
