@@ -93,6 +93,14 @@ exports.up = function (knex) {
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
             tbl
+                .string('buyer_name')
+                .unsigned()
+                .notNullable()
+                .references('name')
+                .inTable('buyers')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
+            tbl
                 .decimal('bid_amount')
                 .notNullable()
         });
