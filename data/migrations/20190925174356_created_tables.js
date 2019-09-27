@@ -40,6 +40,7 @@ exports.up = function (knex) {
             tbl
                 .string('last_name', 128)
                 .notNullable();
+            tbl.primary('id', 'username');
         })
         .createTable('products', tbl => {
             tbl.increments();
