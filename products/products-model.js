@@ -1,4 +1,5 @@
 const db = require('../data/db-config');
+const Buyers = require('../buyers/buyers-model');
 
 module.exports = {
     find,
@@ -24,8 +25,11 @@ function findById(id) {
 
         .then(async product => {
             product[0].bids = await db('product_bids').where({ product_id: product[0].id });
-
-            return product
+            product[0].bids = await Promise.all(product[0].bids.map(async bid => {
+                bid.details = await Buyers.findById(bid.buyer_id);
+                return bid;
+            }))
+            return product;
         });
 };
 
