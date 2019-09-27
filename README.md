@@ -270,13 +270,13 @@ Returns an Array of all products previously posted by a specific seller. Example
 
 `DEL /api/products/:id`
 
-Requires authorization.
+Requires authorization
 
 ### Edit product by ID
 
 `PUT /api/products/:id`
 
-Requires authorization.
+Requires authorization
 
 Requires at least one field to update. 
 
