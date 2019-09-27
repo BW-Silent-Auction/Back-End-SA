@@ -168,21 +168,42 @@ Returns the Product object with all bids for that product. Example response body
             "id": 2,
             "product_id": 2,
             "buyer_id": 2,
-            "bid_amount": 1165.95
+            "bid_amount": 1165.95,
+            "details": {
+                "id": 2,
+                "username": "camalv",
+                "email": "cameron@me.com",
+                "first_name": "Cameron",
+                "last_name": "Alvarado"
+            },
         },
         {
             "id": 3,
             "product_id": 2,
             "buyer_id": 3,
-            "bid_amount": 1170.95
+            "bid_amount": 1170.95,
+            "details": {
+                "id": 3,
+                "username": "dmaack123",
+                "email": "dominique@me.com",
+                "first_name": "Dominique",
+                "last_name": "Maack"
+            },
         },
         {
             "id": 12,
             "product_id": 2,
             "buyer_id": 4,
-            "bid_amount": 1180.95
-        }
-    ]
+            "bid_amount": 1180.95,
+            "details": {
+                "id": 4,
+                "username": "chaonyc",
+                "email": "chao@me.com",
+                "first_name": "Chao",
+                "last_name": "Ji"
+            },
+        },
+    ];
 }
 ```
 
