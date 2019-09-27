@@ -40,7 +40,6 @@ exports.up = function (knex) {
             tbl
                 .string('last_name', 128)
                 .notNullable();
-            tbl.primary('id', 'username');
         })
         .createTable('products', tbl => {
             tbl.increments();
@@ -90,14 +89,6 @@ exports.up = function (knex) {
                 .unsigned()
                 .notNullable()
                 .references('id')
-                .inTable('buyers')
-                .onUpdate('CASCADE')
-                .onDelete('CASCADE');
-            tbl
-                .string('buyer_username')
-                .unsigned()
-                .notNullable()
-                .references('username')
                 .inTable('buyers')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
